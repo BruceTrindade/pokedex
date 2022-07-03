@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pokemon_img"
         android:textColor="#919191"
         android:textSize="14sp"
-        tools:text="N 001"/>
+        tools:text="N 004"/>
 
     <TextView
         android:id="@+id/pokemon_name"

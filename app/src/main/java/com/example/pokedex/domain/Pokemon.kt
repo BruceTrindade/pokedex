@@ -2,7 +2,7 @@ package com.example.pokedex.domain
 
 data class Pokemon(
     val imageUrl: String,
-    val number: Int,
+    val number: String,
     val name: String,
     val types: List<PokemonType>,
 )
