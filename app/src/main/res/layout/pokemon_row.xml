@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginLeft="16dp"
+    android:layout_marginStart="24dp"
     android:layout_marginTop="16dp"
     android:layout_marginEnd="16dp"
-    android:layout_marginRight="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -21,9 +19,8 @@
 
     <ImageView
         android:id="@+id/pokemon_img"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:background="@drawable/charmander"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,49 +29,50 @@
         android:id="@+id/pokemon_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_img"
         android:textColor="#919191"
-        android:textSize="14sp"
+        android:textSize="16sp"
         tools:text="N 004"/>
 
     <TextView
         android:id="@+id/pokemon_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="20dp"
         android:textColor="#313131"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_number"
         tools:text="Charmander" />
 
     <TextView
         android:id="@+id/pokemon_primary_type"
-        android:layout_width="115dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="20dp"
+        android:paddingHorizontal="4dp"
         android:background="#212121"
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_name"
         tools:text="Fire" />
 
     <TextView
         android:id="@+id/pokemon_second_type"
-        android:layout_width="115dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#212121"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="4dp"
+        android:paddingHorizontal="4dp"
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/pokemon_primary_type"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_name"
         tools:text="Water" />

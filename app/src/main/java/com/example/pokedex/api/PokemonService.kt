@@ -9,8 +9,8 @@ import retrofit2.http.Query
 
 interface PokemonService {
     @GET("pokemon")
-    fun listPokemons(@Query("limit") limit: Int = 151): Call<PokemonAPI>
+    fun listPokemons(@Query("limit") limit: Int): Call<PokemonAPI>
 
     @GET("pokemon/{number}")
-    fun getPokemon(number: Int): Call<PokemonApiResult>
+    fun getPokemon(@Path("number") number: Int): Call<PokemonApiResult>
 }

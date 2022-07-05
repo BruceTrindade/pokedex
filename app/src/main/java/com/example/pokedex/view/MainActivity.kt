@@ -2,44 +2,38 @@ package com.example.pokedex.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
-import com.example.pokedex.api.PokemonRepository
 import com.example.pokedex.domain.Pokemon
-import com.example.pokedex.domain.PokemonType
+import com.example.pokedex.viewmodel.PokemonViewModel
+import com.example.pokedex.viewmodel.PokemonViewModelFactory
 
 class MainActivity : AppCompatActivity() {
+
+    val recyclerView by lazy { findViewById<RecyclerView>(R.id.pokemon_recycler_le) }
+
+    val viewModel by lazy {
+        ViewModelProvider(this, PokemonViewModelFactory())
+            .get(PokemonViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.pokemon_recycler)
-        val layoutManager = LinearLayoutManager(this)
+        viewModel.pokemons.observe(this, Observer { listPokemon ->
+            loadRecyclerView(listPokemon)
+        })
 
-        val pokemon = Pokemon(
-            "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
-            "004",
-            "charmander",
-            listOf(
-                PokemonType("Fire")
-            )
-        )
-        val pokemons = listOf(
-            pokemon,
-            pokemon,
-            pokemon,
-            pokemon,
-            pokemon,
-            pokemon,
-            pokemon,
-            pokemon,
-            pokemon,
-        )
+    }
 
-        val pokemonsApi = PokemonRepository.getPokemons()
-
-        recyclerView.layoutManager = layoutManager
+    private fun loadRecyclerView(pokemons: List<Pokemon>) {
+        recyclerView.layoutManager = GridLayoutManager(this,2)
         recyclerView.adapter = PokemonAdapter(pokemons)
+
     }
 }
