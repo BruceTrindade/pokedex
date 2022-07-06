@@ -26,56 +26,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/pokemon_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_img"
-        android:textColor="#919191"
-        android:textSize="16sp"
-        tools:text="N 004"/>
-
-    <TextView
         android:id="@+id/pokemon_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:textColor="#313131"
         android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_number"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_img"
         tools:text="Charmander" />
-
-    <TextView
-        android:id="@+id/pokemon_primary_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:paddingHorizontal="4dp"
-        android:background="#212121"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_name"
-        tools:text="Fire" />
-
-    <TextView
-        android:id="@+id/pokemon_second_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#212121"
-        android:layout_marginStart="4dp"
-        android:paddingHorizontal="4dp"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/pokemon_primary_type"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_name"
-        tools:text="Water" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

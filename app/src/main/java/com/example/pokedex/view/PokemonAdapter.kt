@@ -31,48 +31,23 @@ class PokemonAdapter (
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: Pokemon) = with(itemView) {
             val pokemon = findViewById<ImageView>(R.id.pokemon_img)
-            val pokemonNumber = findViewById<TextView>(R.id.pokemon_number)
+//            val pokemonNumber = findViewById<TextView>(R.id.pokemon_number)
             val pokemonName = findViewById<TextView>(R.id.pokemon_name)
-            val pokemonPrimaryType = findViewById<TextView>(R.id.pokemon_primary_type)
-            val pokemonSecondType = findViewById<TextView>(R.id.pokemon_second_type)
+//            val pokemonPrimaryType = findViewById<TextView>(R.id.pokemon_primary_type)
+//            val pokemonSecondType = findViewById<TextView>(R.id.pokemon_second_type)
 
             item?.let {
                 Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
-                pokemonNumber.text = "Nº ${item.formattedNumber}"
+//                pokemonNumber.text = "Nº ${item.formattedNumber}"
                 pokemonName.text = item.formattedName
-                pokemonPrimaryType.text = item.types[0].name
+//                pokemonPrimaryType.text = item.types[0].name
                 //when
-                if (item.types.size > 1 ) pokemonSecondType.text = item.types[1].name
-                else pokemonSecondType.visibility = View.GONE
+//                if (item.types.size > 1 ) pokemonSecondType.text = item.types[1].name
+//                else pokemonSecondType.visibility = View.GONE
             }
         }
     }
 }
-
-/*
-
-            if (position % 2 == 0) {
-                item?.let {
-                    Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
-                    pokemonNumber.text = "Nº ${item.formattedNumber}"
-                    pokemonName.text = item.formattedName
-                    pokemonPrimaryType.text = item.types[0].name
-                    //when
-                    if (item.types.size > 1 ) pokemonSecondType.text = item.types[1].name
-                    else pokemonSecondType.visibility = View.GONE
-                }
-            } else {
-                item?.let {
-                    Glide.with(itemView.context).load(it.imageUrl).into(pokemon2)
-                    pokemonNumber2.text = "Nº ${item.formattedNumber}"
-                    pokemonName2.text = item.formattedName
-                    pokemonPrimaryType2.text = item.types[0].name
-                    //when
-                    if (item.types.size > 1 ) pokemonSecondType2.text = item.types[1].name
-                    else pokemonSecondType2.visibility = View.GONE
-                }
-            }
- */
 
 /*
 <?xml version="1.0" encoding="utf-8"?>
