@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.domain.Pokemon
@@ -14,7 +13,7 @@ import com.example.pokedex.viewmodel.PokemonViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
-    val recyclerView by lazy { findViewById<RecyclerView>(R.id.pokemon_recycler_le) }
+    val recyclerView by lazy { findViewById<RecyclerView>(R.id.pokemon_recycler) }
 
     val viewModel by lazy {
         ViewModelProvider(this, PokemonViewModelFactory())

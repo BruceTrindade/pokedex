@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
+import com.example.pokedex.domain.Pokemon
+import com.example.pokedex.viewmodel.PokemonViewModel
+import com.example.pokedex.viewmodel.PokemonViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +24,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PokedexHomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PokedexHomeFragment : Fragment() {
+class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +38,18 @@ class PokedexHomeFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+      //  val recyclerView by lazy { findViewById<RecyclerView>(R.id.pokemon_recycler) }
+
+        val viewModel by lazy {
+            ViewModelProvider(this, PokemonViewModelFactory())
+                .get(PokemonViewModel::class.java)
+        }
+
+        viewModel.pokemons.observe(this, Observer { listPokemon ->
+            loadRecyclerView(listPokemon)
+        })
+
     }
 
     override fun onCreateView(
@@ -57,4 +79,11 @@ class PokedexHomeFragment : Fragment() {
                 }
             }
     }
+
+    private fun loadRecyclerView(pokemons: List<Pokemon>) {
+      //  recyclerView.layoutManager = GridLayoutManager(this,2)
+      //  recyclerView.adapter = PokemonAdapter(pokemons)
+
+    }
 }
+
