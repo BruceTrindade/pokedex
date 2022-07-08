@@ -40,15 +40,15 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
         }
 
       //  val recyclerView by lazy { findViewById<RecyclerView>(R.id.pokemon_recycler) }
-
-        val viewModel by lazy {
-            ViewModelProvider(this, PokemonViewModelFactory())
-                .get(PokemonViewModel::class.java)
-        }
-
-        viewModel.pokemons.observe(this, Observer { listPokemon ->
-            loadRecyclerView(listPokemon)
-        })
+//
+//        val viewModel by lazy {
+//            ViewModelProvider(this, PokemonViewModelFactory())
+//                .get(PokemonViewModel::class.java)
+//        }
+//
+//        viewModel.pokemons.observe(this, Observer { listPokemon ->
+//            loadRecyclerView(listPokemon)
+//        })
 
     }
 

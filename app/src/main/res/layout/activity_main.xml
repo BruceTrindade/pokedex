@@ -6,20 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pokemon_recycler"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="4dp"
-        android:paddingBottom="32dp"
-        android:elevation="5dp"
-        android:clipToPadding="true"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_pokedex"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
