@@ -14,26 +14,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val recyclerView by lazy { findViewById<RecyclerView>(R.id.pokemon_recycler) }
-
-    val viewModel by lazy {
-        ViewModelProvider(this, PokemonViewModelFactory())
-            .get(PokemonViewModel::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel.pokemons.observe(this, Observer { listPokemon ->
-            loadRecyclerView(listPokemon)
-        })
-
-    }
-
-    private fun loadRecyclerView(pokemons: List<Pokemon>) {
-        recyclerView.layoutManager = GridLayoutManager(this,2)
-        recyclerView.adapter = PokemonAdapter(pokemons)
 
     }
 }
