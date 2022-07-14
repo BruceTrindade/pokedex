@@ -9,6 +9,16 @@
         android:id="@+id/firstDestination"
         android:name="com.example.pokedex.view.PokedexHomeFragment"
         android:label="fragment_pokedex_home"
-        tools:layout="@layout/fragment_pokedex_home" />
+        tools:layout="@layout/fragment_pokedex_home" >
+        <action
+            android:id="@+id/action_firstDestination_to_pokedexDetailsFragment"
+            app:destination="@id/pokedexDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pokedexDetailsFragment"
+        android:name="com.example.pokedex.view.PokedexDetailsFragment"
+        android:label="fragment_pokedex_details"
+        tools:layout="@layout/fragment_pokedex_details" />
 
 </navigation>
