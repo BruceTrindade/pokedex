@@ -1,12 +1,16 @@
 package com.example.pokedex.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import java.util.*
 
+@Parcelize
 data class Pokemon(
     val number: String,
     val name: String,
-    val types: List<PokemonType>,
-) {
+    val types: @RawValue List<PokemonType>,
+) : Parcelable {
 
     val formattedNumber = when {
         number.length < 2 -> "00$number"

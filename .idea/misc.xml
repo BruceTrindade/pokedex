@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_pokedex_details.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/fragment_pokedex_home.xml" value="0.1852355072463768" />
         <entry key="app/src/main/res/layout/pokemon_row.xml" value="0.45" />
       </map>

@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
@@ -12,6 +15,7 @@ import com.example.pokedex.domain.Pokemon
 
 class PokemonAdapter (
     private val items: List<Pokemon>,
+    private val onItemClicked : (Pokemon) -> Unit,
 ) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,18 +29,18 @@ class PokemonAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.bindView(item)
+        holder.bindView(item, onItemClicked)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(item: Pokemon) = with(itemView) {
+        fun bindView(item: Pokemon, onItemClicked: (Pokemon) -> Unit) = with(itemView) {
             val pokemon = findViewById<ImageView>(R.id.pokemon_img)
 //            val pokemonNumber = findViewById<TextView>(R.id.pokemon_number)
             val pokemonName = findViewById<TextView>(R.id.pokemon_name)
 //            val pokemonPrimaryType = findViewById<TextView>(R.id.pokemon_primary_type)
 //            val pokemonSecondType = findViewById<TextView>(R.id.pokemon_second_type)
 
-            item?.let {
+            item.let {
                 Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
 //                pokemonNumber.text = "Nº ${item.formattedNumber}"
                 pokemonName.text = item.formattedName
@@ -44,6 +48,9 @@ class PokemonAdapter (
                 //when
 //                if (item.types.size > 1 ) pokemonSecondType.text = item.types[1].name
 //                else pokemonSecondType.visibility = View.GONE
+            }
+            itemView.setOnClickListener {
+                onItemClicked(item)
             }
         }
     }

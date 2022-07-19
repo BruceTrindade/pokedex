@@ -19,6 +19,11 @@
         android:id="@+id/pokedexDetailsFragment"
         android:name="com.example.pokedex.view.PokedexDetailsFragment"
         android:label="fragment_pokedex_details"
-        tools:layout="@layout/fragment_pokedex_details" />
+        tools:layout="@layout/fragment_pokedex_details" >
+        <argument
+            android:name="pokemon"
+            app:argType="com.example.pokedex.domain.Pokemon" />
+
+    </fragment>
 
 </navigation>
