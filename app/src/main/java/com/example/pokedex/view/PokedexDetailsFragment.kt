@@ -9,6 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
+import kotlinx.android.synthetic.main.fragment_pokedex_details.pokemon_name
+import kotlinx.android.synthetic.main.pokemon_row.*
 
 class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
 
@@ -34,14 +36,8 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
 
     private fun setupView(view: View) {
         Glide.with(view).load(args.pokemon.imageUrl).into(pokemon_img_details)
+        pokemon_name.text = args.pokemon.name
 
     }
 
 }
-
-/*
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/white"/>
-    <corners android:radius="16dp"/>
-</shape>
- */
