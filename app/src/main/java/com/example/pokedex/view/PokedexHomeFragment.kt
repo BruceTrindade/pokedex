@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
@@ -22,6 +24,8 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
                 .get(PokemonViewModel::class.java)
         }
 
+   private lateinit var pokemonAdapter: PokemonAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.pokemons.observe(viewLifecycleOwner, Observer { listPokemon ->
             loadRecyclerView(listPokemon)
@@ -29,8 +33,12 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     }
 
     private fun loadRecyclerView(pokemons: List<Pokemon>) {
+        this.pokemonAdapter = PokemonAdapter(pokemons) { pokemon ->
+            val actions = PokedexHomeFragmentDirections.actionFirstDestinationToPokedexDetailsFragment(pokemon)
+            findNavController().navigate(actions)
+        }
         pokemon_recycler.layoutManager = GridLayoutManager(context,2)
-        pokemon_recycler.adapter = PokemonAdapter(pokemons)
+        pokemon_recycler.adapter = this.pokemonAdapter
 
     }
 }
