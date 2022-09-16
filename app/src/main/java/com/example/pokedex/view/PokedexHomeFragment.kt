@@ -15,7 +15,7 @@ import com.example.pokedex.viewmodel.PokemonViewModelFactory
 import kotlinx.android.synthetic.main.fragment_pokedex_home.*
 
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
-
+//wip
     val viewModel by lazy {
         ViewModelProvider(this, PokemonViewModelFactory())
             .get(PokemonViewModel::class.java)
