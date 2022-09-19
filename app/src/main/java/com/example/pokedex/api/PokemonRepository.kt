@@ -1,11 +1,10 @@
 package com.example.pokedex.api
 
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-object PokemonRepository {
-
+class PokemonRepository @Inject constructor(
     private val service: PokemonService
+) {
 
     suspend fun listPokemons(limit: Int = 100) = service.listPokemons(limit)
 

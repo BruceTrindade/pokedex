@@ -14,9 +14,11 @@ import com.example.pokedex.R
 import com.example.pokedex.domain.Pokemon
 import com.example.pokedex.viewmodel.PokemonViewModel
 import com.example.pokedex.viewmodel.PokemonViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_home.*
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
     private lateinit var viewModel2: PokemonViewModel

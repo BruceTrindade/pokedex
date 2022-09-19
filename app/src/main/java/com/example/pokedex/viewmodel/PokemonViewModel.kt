@@ -7,12 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.load.engine.Resource
 import com.example.pokedex.api.PokemonRepository
 import com.example.pokedex.domain.Pokemon
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 
-class PokemonViewModel : ViewModel(
+@HiltViewModel
+class PokemonViewModel @Inject constructor(
     private val repository: PokemonRepository
-) {
+)  : ViewModel() {
 
     private val _pokemons = MutableLiveData<List<Pokemon>>()
 
@@ -35,13 +39,27 @@ class PokemonViewModel : ViewModel(
     }
 
     private suspend fun safeFetch() {
-        loadPokemons()
+      //  loadPokemons()
     }
 
-    private suspend fun loadPokemons() {
-        val pokemonsApiResult = PokemonRepository.listPokemons()
+    private fun requestPokemon() {
 
-        pokemonsApiResult?.results?.let {
+        viewModelScope.launch(Dispatchers.IO) {
+            val test = repository.listPokemons()
+            _pokemons.po
+            test.execute().body().results.let {
+
+            }
+            }
+            repository.listPokemons()
+        }
+    }
+
+  /*  private suspend fun loadPokemons() {
+        val pokemonsApiResult = repository.listPokemons()
+        if (pokemonsApiResult.isExecuted)
+            pokemonsApiResult.let {
+                _pokemons.value = pokemonsApiResult.
             _pokemons.postValue(
                 it.map { pokemon ->
                     val number = pokemon.url.replace("https://pokeapi.co/api/v2/pokemon/", "")
@@ -60,5 +78,5 @@ class PokemonViewModel : ViewModel(
                 }
             )
         }
-    }
+    }*/
 }
