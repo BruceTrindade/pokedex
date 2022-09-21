@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
 import kotlinx.android.synthetic.main.fragment_pokedex_details.pokemon_name
 
+@AndroidEntryPoint
 class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
 
     private val args: PokedexDetailsFragmentArgs by navArgs()
