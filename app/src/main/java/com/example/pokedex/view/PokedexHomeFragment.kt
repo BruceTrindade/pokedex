@@ -17,12 +17,10 @@ import kotlinx.coroutines.launch
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
     private lateinit var viewModel2: PokemonViewModel
-    //  private lateinit var viewModelFactory2: PokemonViewModelFactory
 
     private val pokemonAdapter by lazy { PokemonAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // viewModelFactory2 = PokemonViewModelFactory()
         viewModel2 = ViewModelProvider(this).get(PokemonViewModel::class.java)
         pokemonsObserver()
         loadRecyclerView()
