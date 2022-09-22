@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.R
-import com.example.pokedex.domain.Pokemon
 import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_home.*
@@ -18,20 +17,13 @@ import kotlinx.coroutines.launch
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
     private lateinit var viewModel2: PokemonViewModel
-    //  private lateinit var viewModelFactory2: PokemonViewModelFactory
 
     private val pokemonAdapter by lazy { PokemonAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // viewModelFactory2 = PokemonViewModelFactory()
         viewModel2 = ViewModelProvider(this).get(PokemonViewModel::class.java)
         pokemonsObserver()
-        viewModel2.pokemons.observe(
-            viewLifecycleOwner,
-            Observer { listPokemon ->
-                loadRecyclerView(listPokemon)
-            }
-        )
+        loadRecyclerView()
     }
 
     private fun pokemonsObserver() = lifecycleScope.launch {
@@ -43,7 +35,7 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
         )
     }
 
-    private fun loadRecyclerView(pokemons: List<Pokemon>) {
+    private fun loadRecyclerView() {
 //        this.pokemonAdapter = PokemonAdapter(pokemons) { pokemon ->
 //            val actions = PokedexHomeFragmentDirections.actionFirstDestinationToPokedexDetailsFragment(pokemon)
 //            findNavController().navigate(actions)
