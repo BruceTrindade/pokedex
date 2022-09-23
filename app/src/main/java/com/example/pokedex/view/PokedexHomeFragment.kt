@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.R
 import com.example.pokedex.viewmodel.PokemonViewModel
@@ -16,18 +17,19 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
-    private lateinit var viewModel2: PokemonViewModel
+    private lateinit var viewModel: PokemonViewModel
 
     private val pokemonAdapter by lazy { PokemonAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel2 = ViewModelProvider(this).get(PokemonViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PokemonViewModel::class.java)
         pokemonsObserver()
-        loadRecyclerView()
+        setupListPokemons()
+        setupClickPokemons()
     }
 
     private fun pokemonsObserver() = lifecycleScope.launch {
-        viewModel2.pokemons.observe(
+        viewModel.pokemons.observe(
             viewLifecycleOwner,
             Observer {
                 pokemonAdapter.pokemons = it
@@ -35,12 +37,15 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
         )
     }
 
-    private fun loadRecyclerView() {
-//        this.pokemonAdapter = PokemonAdapter(pokemons) { pokemon ->
-//            val actions = PokedexHomeFragmentDirections.actionFirstDestinationToPokedexDetailsFragment(pokemon)
-//            findNavController().navigate(actions)
-//        }
+    private fun setupListPokemons() {
         pokemon_recycler.layoutManager = GridLayoutManager(context, 2)
         pokemon_recycler.adapter = pokemonAdapter
+    }
+
+    private fun setupClickPokemons() {
+        pokemonAdapter.setOnClickListener { pokemon ->
+            val actions = PokedexHomeFragmentDirections.actionFirstDestinationToPokedexDetailsFragment(pokemon)
+            findNavController().navigate(actions)
+        }
     }
 }
