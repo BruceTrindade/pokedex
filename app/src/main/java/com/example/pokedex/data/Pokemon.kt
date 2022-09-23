@@ -1,4 +1,4 @@
-package com.example.pokedex.domain
+package com.example.pokedex.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
