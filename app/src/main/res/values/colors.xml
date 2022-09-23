@@ -10,24 +10,24 @@
     <!-- POKEDEX COLORS B22328-->
     <color name="background">#2B292B</color>
     <color name="fighting">#9F422A</color>
-    <color name="grass">#007C42</color>
+    <color name="grass">#179A55</color>
     <color name="ground">#AD7235</color>
     <color name="fire">#F7786B</color>
     <color name="flying">#90B1C5</color>
     <color name="ghost">#363069</color>
     <color name="ice">#7ECFF2</color>
-    <color name="poison">#642785</color>
+    <color name="poison">#FFBB86FC</color>
     <color name="psychic">#AC296B</color>
     <color name="rock">#4B190E</color>
     <color name="steel">#5C756D</color>
-    <color name="water">#2648DC</color>
+    <color name="water">#58ABF6</color>
     <color name="electric">#E0E64B</color>
     <color name="fairy">#9E1A44</color>
     <color name="bug">#179A55</color>
     <color name="dark">#040706</color>
     <color name="dragon">#378A94</color>
 
-   <!--     &lt;!&ndash; Poke Colors &ndash;&gt;
+   <!--     &lt;!&ndash; Poke Colors -->
     <color name="poke_red">#F7786B</color>
     <color name="tab_text_color">#CBCDCF</color>
     <color name="poke_blue">#58ABF6</color>
@@ -39,7 +39,7 @@
     <color name="poke_purple">#FFD76F</color>
     <color name="poke_pink">#FA6FFF</color>
     <color name="poke_brown">#C47C55</color>
-    &lt;!&ndash; Translucent Colors &ndash;&gt;
+    <!-- Translucent Colors -->
     <color name="translucent">#00000000</color>
     <color name="mid_translucent_white">#80FFFFFF</color>
     <color name="poke_red_mid_translucent">#80F7786B</color>

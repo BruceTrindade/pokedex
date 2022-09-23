@@ -1,5 +1,6 @@
 package com.example.pokedex.view
 
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,16 +53,26 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bindView(item: Pokemon, onItemClickListener: ((Pokemon) -> Unit)? = null) {
             with(itemView) {
                 val pokemonBackground = findViewById<CardView>(R.id.home_background)
                 val pokemon = findViewById<ImageView>(R.id.pokemon_img)
                 val pokemonName = findViewById<TextView>(R.id.pokemon_name)
                 item.let {
-                    val color = resources.getColor(PokemonTypesColors.getTypeColor(it.types[0].name))
-                    pokemonBackground.setBackgroundColor(
-                       color
-                    )
+                    val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(it.types[0].name))
+                    val secondColor = resources.getColor(R.color.white)
+                    val drawable = GradientDrawable().apply {
+                        colors = intArrayOf(
+                            primaryColor,
+                            if (it.types.size > 1) resources.getColor(PokemonTypesColors.getTypeColor(it.types[1].name)) else secondColor
+                        )
+                        orientation = GradientDrawable.Orientation.BOTTOM_TOP
+                        gradientType = GradientDrawable.LINEAR_GRADIENT
+                        shape = GradientDrawable.RECTANGLE
+                        cornerRadius = 24f
+                    }
+                    pokemonBackground.background = drawable
                     Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
                     pokemonName.text = item.formattedName
                 }
