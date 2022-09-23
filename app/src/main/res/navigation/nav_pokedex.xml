@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_pokedex_details" >
         <argument
             android:name="pokemon"
-            app:argType="com.example.pokedex.domain.Pokemon" />
+            app:argType="com.example.pokedex.data.Pokemon" />
 
     </fragment>
 

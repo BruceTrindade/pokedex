@@ -1,6 +1,6 @@
-package com.example.pokedex.model
+package com.example.pokedex.data.model
 
-import com.example.pokedex.domain.PokemonType
+import com.example.pokedex.data.PokemonType
 
 data class PokemonAPI(
     val count: Int,
