@@ -12,10 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.domain.Pokemon
 
-class PokemonAdapter(
-//    private val items: List<Pokemon>,
-//    private val onItemClicked : (Pokemon) -> Unit,
-) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Pokemon>() {
         override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
@@ -49,12 +46,11 @@ class PokemonAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = pokemons[position]
-
-        holder.bindView(item)
+        holder.bindView(item, onItemClickListener)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(item: Pokemon) {
+        fun bindView(item: Pokemon, onItemClickListener: ((Pokemon) -> Unit)? = null) {
             with(itemView) {
                 val pokemon = findViewById<ImageView>(R.id.pokemon_img)
 //            val pokemonNumber = findViewById<TextView>(R.id.pokemon_number)
@@ -71,11 +67,19 @@ class PokemonAdapter(
 //                if (item.types.size > 1 ) pokemonSecondType.text = item.types[1].name
 //                else pokemonSecondType.visibility = View.GONE
                 }
-//            itemView.setOnClickListener {
-//                onItemClicked(item)
-//            }
+                itemView.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(item)
+                    }
+                }
             }
         }
+    }
+
+    private var onItemClickListener: ((Pokemon) -> Unit)? = null
+
+    fun setOnClickListener(listener: (Pokemon) -> Unit) {
+        onItemClickListener = listener
     }
 }
 
