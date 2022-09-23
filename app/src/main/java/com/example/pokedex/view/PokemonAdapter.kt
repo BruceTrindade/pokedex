@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.util.PokemonTypesColors
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
@@ -52,10 +54,14 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: Pokemon, onItemClickListener: ((Pokemon) -> Unit)? = null) {
             with(itemView) {
+                val pokemonBackground = findViewById<CardView>(R.id.home_background)
                 val pokemon = findViewById<ImageView>(R.id.pokemon_img)
                 val pokemonName = findViewById<TextView>(R.id.pokemon_name)
-
                 item.let {
+                    val color = resources.getColor(PokemonTypesColors.getTypeColor(it.types[0].name))
+                    pokemonBackground.setBackgroundColor(
+                       color
+                    )
                     Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
                     pokemonName.text = item.formattedName
                 }

@@ -7,4 +7,53 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- POKEDEX COLORS B22328-->
+    <color name="background">#2B292B</color>
+    <color name="fighting">#9F422A</color>
+    <color name="grass">#007C42</color>
+    <color name="ground">#AD7235</color>
+    <color name="fire">#F7786B</color>
+    <color name="flying">#90B1C5</color>
+    <color name="ghost">#363069</color>
+    <color name="ice">#7ECFF2</color>
+    <color name="poison">#642785</color>
+    <color name="psychic">#AC296B</color>
+    <color name="rock">#4B190E</color>
+    <color name="steel">#5C756D</color>
+    <color name="water">#2648DC</color>
+    <color name="electric">#E0E64B</color>
+    <color name="fairy">#9E1A44</color>
+    <color name="bug">#179A55</color>
+    <color name="dark">#040706</color>
+    <color name="dragon">#378A94</color>
+
+   <!--     &lt;!&ndash; Poke Colors &ndash;&gt;
+    <color name="poke_red">#F7786B</color>
+    <color name="tab_text_color">#CBCDCF</color>
+    <color name="poke_blue">#58ABF6</color>
+    <color name="poke_green">#2CDAB1</color>
+    <color name="poke_grey">#A8A8A8</color>
+    <color name="poke_black">#3E4650</color>
+    <color name="poke_yellow">#FFD76F</color>
+    <color name="poke_white">#FFFAF0</color>
+    <color name="poke_purple">#FFD76F</color>
+    <color name="poke_pink">#FA6FFF</color>
+    <color name="poke_brown">#C47C55</color>
+    &lt;!&ndash; Translucent Colors &ndash;&gt;
+    <color name="translucent">#00000000</color>
+    <color name="mid_translucent_white">#80FFFFFF</color>
+    <color name="poke_red_mid_translucent">#80F7786B</color>
+    <color name="poke_blue_mid_translucent">#8058ABF6</color>
+    <color name="poke_green_mid_translucent">#802CDAB1</color>
+    <color name="poke_gray_mid_translucent">#80A8A8A8</color>
+    <color name="poke_black_mid_translucent">#803E4650</color>
+    <color name="poke_yellow_mid_translucent">#80FFD76F</color>
+    <color name="poke_white_mid_translucent">#80FFFAF0</color>
+    <color name="poke_purple_mid_translucent">#80FFD76F</color>
+    <color name="poke_pink_mid_translucent">#80FA6FFF</color>
+    <color name="poke_brown_mid_translucent">#80C47C55</color>
+    <color name="black_transparent">#80000000</color>
+    <color name="default_foreground_secondary">#FFFFFF</color>
+    <color name="default_bg_secondary">#B8B8B8</color>-->
+
 </resources>

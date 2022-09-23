@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/drawable/shape_round.xml" value="0.1465" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_pokedex_details.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_pokedex_home.xml" value="0.1852355072463768" />
+        <entry key="app/src/main/res/layout/fragment_pokedex_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/pokemon_row.xml" value="0.45" />
       </map>
     </option>
