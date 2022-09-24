@@ -1,5 +1,6 @@
 package com.example.pokedex.view
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.util.PokemonTypesColors
+import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.fragment_pokedex_details.*
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
@@ -59,6 +63,8 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                 val pokemonBackground = findViewById<CardView>(R.id.home_background)
                 val pokemon = findViewById<ImageView>(R.id.pokemon_img)
                 val pokemonName = findViewById<TextView>(R.id.pokemon_name)
+                val pokemonType = findViewById<Chip>(R.id.pokemon_type)
+                val pokemonSecondType = findViewById<Chip>(R.id.pokemon_second_type)
                 item.let {
                     val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(it.types[0].name))
                     val secondColor = resources.getColor(R.color.white)
@@ -74,7 +80,15 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                     }
                     pokemonBackground.background = drawable
                     Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
-                    pokemonName.text = item.formattedName
+                    pokemonName.text = it.formattedName
+                    pokemonType.text = it.types[0].name
+                    if (it.types.size > 1) {
+                        pokemonSecondType.text = it.types[1].name
+                        pokemonSecondType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[1].name)))
+                    } else {
+                        pokemonSecondType.visibility = View.GONE
+                    }
+                    pokemonType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[0].name)))
                 }
                 itemView.setOnClickListener {
                     onItemClickListener?.let {
