@@ -46,7 +46,8 @@ class PokemonViewModel @Inject constructor(
                                     value!!.name,
                                     value.types.map { ty ->
                                         ty.type
-                                    }
+                                    },
+                                    value.id.toString()
                                 )
                             }
                         }

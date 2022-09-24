@@ -18,6 +18,7 @@ import com.example.pokedex.data.Pokemon
 import com.example.pokedex.util.PokemonTypesColors
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
+import java.util.*
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
@@ -27,8 +28,8 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
         }
 
         override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-            return oldItem.formattedNumber == newItem.formattedNumber && oldItem.imageUrl == newItem.imageUrl &&
-                oldItem.formattedName == newItem.formattedName && oldItem.types == newItem.types
+            return oldItem.number == newItem.number && oldItem.imageUrl == newItem.imageUrl &&
+                oldItem.name == newItem.name && oldItem.types == newItem.types
         }
     }
 
@@ -66,6 +67,12 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                 val pokemonType = findViewById<Chip>(R.id.pokemon_type)
                 val pokemonSecondType = findViewById<Chip>(R.id.pokemon_second_type)
                 item.let {
+                    val formattedName = it.name.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.getDefault()
+                        ) else it.toString()
+                    }
+                    val number = it.imageUrl
                     val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(it.types[0].name))
                     val secondColor = resources.getColor(R.color.white)
                     val drawable = GradientDrawable().apply {
@@ -79,8 +86,14 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                         cornerRadius = 24f
                     }
                     pokemonBackground.background = drawable
-                    Glide.with(itemView.context).load(it.imageUrl).into(pokemon)
-                    pokemonName.text = it.formattedName
+
+                    val formattedNumber = when {
+                        number.length < 2 -> "00$number"
+                        number.length < 3 -> "0$number"
+                        else -> number
+                    }
+                    Glide.with(itemView.context).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon)
+                    pokemonName.text = formattedName
                     pokemonType.text = it.types[0].name
                     if (it.types.size > 1) {
                         pokemonSecondType.text = it.types[1].name

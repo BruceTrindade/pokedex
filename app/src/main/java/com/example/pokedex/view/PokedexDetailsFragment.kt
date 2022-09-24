@@ -13,6 +13,7 @@ import com.example.pokedex.util.PokemonTypesColors
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
 import kotlinx.android.synthetic.main.fragment_pokedex_details.pokemon_name
+import java.util.*
 
 @AndroidEntryPoint
 class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
@@ -45,9 +46,20 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
             }
             pokemonBackground.background = drawable
         }
-        Glide.with(view).load(args.pokemon.imageUrl).into(pokemon_img_details)
-        pokemon_name.text = args.pokemon.formattedName
-        pokemon_number.text = args.pokemon.formattedNumber
+        val formattedName = args.pokemon.name.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        }
+        val number = args.pokemon.imageUrl
+        val formattedNumber = when {
+            number.length < 2 -> "00$number"
+            number.length < 3 -> "0$number"
+            else -> number
+        }
+        Glide.with(view).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon_img_details)
+        pokemon_name.text = formattedName
+        pokemon_number.text = formattedNumber
         pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), PokemonTypesColors.getTypeColor(args.pokemon.types[0].name)))
         pokemon_primary_type.text = args.pokemon.types[0].name
         if (args.pokemon.types.size > 1) {
