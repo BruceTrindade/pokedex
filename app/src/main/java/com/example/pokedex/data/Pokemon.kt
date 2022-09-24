@@ -11,7 +11,7 @@ data class Pokemon(
     @SerializedName("name")
     val name: String,
     @SerializedName("types")
-    val types: @RawValue List<PokemonType>,
+    val types: @RawValue List<PokemonType>
 ) : Serializable {
 
     val formattedNumber = when {
