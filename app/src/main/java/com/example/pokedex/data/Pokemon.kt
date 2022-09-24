@@ -1,16 +1,18 @@
 package com.example.pokedex.data
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.RawValue
+import java.io.Serializable
 import java.util.*
 
-@Parcelize
 data class Pokemon(
+    @SerializedName("number")
     val number: String,
+    @SerializedName("name")
     val name: String,
+    @SerializedName("types")
     val types: @RawValue List<PokemonType>,
-) : Parcelable {
+) : Serializable {
 
     val formattedNumber = when {
         number.length < 2 -> "00$number"
