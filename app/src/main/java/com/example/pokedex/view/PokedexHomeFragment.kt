@@ -38,8 +38,10 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     }
 
     private fun setupListPokemons() {
-        pokemon_recycler.layoutManager = GridLayoutManager(context, 2)
-        pokemon_recycler.adapter = pokemonAdapter
+        pokemon_recycler.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = pokemonAdapter
+        }
     }
 
     private fun setupClickPokemons() {
