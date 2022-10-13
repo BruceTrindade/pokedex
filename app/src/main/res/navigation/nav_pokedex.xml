@@ -23,7 +23,15 @@
         <argument
             android:name="pokemon"
             app:argType="com.example.pokedex.data.Pokemon" />
+        <action
+            android:id="@+id/action_pokedexDetailsFragment_to_pokedexCapturedFragment"
+            app:destination="@id/pokedexCapturedFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/pokedexCapturedFragment"
+        android:name="com.example.pokedex.view.PokedexCapturedFragment"
+        android:label="fragment_pokedex_captured"
+        tools:layout="@layout/fragment_pokedex_captured" />
 
 </navigation>

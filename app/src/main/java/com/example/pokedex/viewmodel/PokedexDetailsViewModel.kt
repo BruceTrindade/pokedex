@@ -13,20 +13,20 @@ import javax.inject.Inject
 import kotlin.IllegalArgumentException
 
 @HiltViewModel
-class PokemonViewModel @Inject constructor(
+class PokedexDetailsViewModel @Inject constructor(
     private val repository: PokemonRepository
 ) : ViewModel() {
 
-    private val _pokemons = MutableLiveData<List<Pokemon>>()
+    private val _detailsPokemons = MutableLiveData<List<Pokemon>>()
 
-    val pokemons: LiveData<List<Pokemon>> = _pokemons
+    val detailsPokemons: LiveData<List<Pokemon>> = _detailsPokemons
 
     init {
         fetch()
     }
 
     private fun fetch() = viewModelScope.launch {
-        requestPokemon()
+      //  requestPokemon()
     }
 
     private suspend fun requestPokemon() {
@@ -34,7 +34,7 @@ class PokemonViewModel @Inject constructor(
             val test = repository.listPokemons()
             if (test.isSuccessful) {
                 test.body()?.results.let {
-                    _pokemons.postValue(
+                    _detailsPokemons.postValue(
                         it!!.map { pok ->
                             val number = pok.url.replace("https://pokeapi.co/api/v2/pokemon/", "")
                                 .replace("/", "").toString()
@@ -57,5 +57,9 @@ class PokemonViewModel @Inject constructor(
                 IllegalArgumentException("error")
             }
         }
+    }
+
+    fun insert(characterModel: Pokemon) = viewModelScope.launch {
+        repository.insert(characterModel)
     }
 }

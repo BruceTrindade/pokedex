@@ -64,6 +64,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                 val pokemonBackground = findViewById<CardView>(R.id.home_background)
                 val pokemon = findViewById<ImageView>(R.id.pokemon_img)
                 val pokemonName = findViewById<TextView>(R.id.pokemon_name)
+               // val pokemonCapture = findViewById<TextView>(R.id.pokemon_capture)
                 val pokemonType = findViewById<Chip>(R.id.pokemon_type)
                 val pokemonSecondType = findViewById<Chip>(R.id.pokemon_second_type)
                 item.let {

@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.util.PokemonTypesColors
+import com.example.pokedex.viewmodel.PokedexDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
 import kotlinx.android.synthetic.main.fragment_pokedex_details.pokemon_name
@@ -18,15 +21,15 @@ import java.util.*
 @AndroidEntryPoint
 class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
 
-    private val args: PokedexDetailsFragmentArgs by navArgs()
+    private lateinit var viewModel: PokedexDetailsViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val args: PokedexDetailsFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(PokedexDetailsViewModel::class.java)
         setupView(view)
+        setupCaptureClick()
     }
 
     private fun setupView(view: View) {
@@ -66,5 +69,15 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
             pokemon_second_type.text = args.pokemon.types[1].name
             pokemon_second_type.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), PokemonTypesColors.getTypeColor(args.pokemon.types[1].name)))
         } else pokemon_second_type.visibility = View.GONE
+    }
+
+    private fun setupCaptureClick() {
+        pokemon_nav.setOnClickListener {
+            val actions = PokedexDetailsFragmentDirections.actionPokedexDetailsFragmentToPokedexCapturedFragment()
+            findNavController().navigate(actions)
+        }
+        pokemon_capture.setOnClickListener {
+            viewModel.insert(args.pokemon)
+        }
     }
 }

@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.data.PokemonRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class PokedexCapturedViewModel @Inject constructor(
     private val repository: PokemonRepository
 ) : ViewModel() {
@@ -21,15 +23,26 @@ class PokedexCapturedViewModel @Inject constructor(
     }
 
     private fun fetch() = viewModelScope.launch {
-//        repository.getAll(). {
-//
-//        }
+        repository.getAll().value.let {
+            _captureds.postValue(
+                it!!.map { pok ->
+                    pok.number
+                    pok.name
+                    pok.types
+                    pok.imageUrl
+                    Pokemon(
+                        pok.number,
+                        pok.name,
+                        pok.types,
+                        pok.imageUrl
+                    )
+                }
+            )
+        }
 
-       // requestPokemon()
     }
 
     fun delete(pokemonModel: Pokemon) = viewModelScope.launch {
         repository.delete(pokemonModel)
     }
-
 }
