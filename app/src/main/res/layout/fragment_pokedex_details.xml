@@ -36,8 +36,8 @@
                             android:textColor="@color/black"
                             android:textSize="32sp"
                             android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/pokemon_img_details"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/pokemon_img_details"/>
 
                         <TextView
                             android:id="@+id/pokemon_number"
