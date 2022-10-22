@@ -76,5 +76,14 @@
 
         </androidx.cardview.widget.CardView>
 
+    <com.example.dsmpokedex.CardViewPoke
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_margin="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

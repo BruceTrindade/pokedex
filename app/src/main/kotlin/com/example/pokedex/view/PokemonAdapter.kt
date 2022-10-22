@@ -1,6 +1,9 @@
 package com.example.pokedex.view
 
+import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +11,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.pokedex.R
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.util.PokemonTypesColors
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
+import kotlinx.android.synthetic.main.pokemon_row.*
+import kotlinx.android.synthetic.main.pokemon_row.view.*
 import java.util.*
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
@@ -61,11 +69,13 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
         fun bindView(item: Pokemon, onItemClickListener: ((Pokemon) -> Unit)? = null) {
             with(itemView) {
-                val pokemonBackground = findViewById<CardView>(R.id.home_background)
+              //  val pokemonBackground = findViewById<CardView>(R.id.home_background)
                 val pokemon = findViewById<ImageView>(R.id.pokemon_img)
-                val pokemonName = findViewById<TextView>(R.id.pokemon_name)
-                val pokemonType = findViewById<Chip>(R.id.pokemon_type)
-                val pokemonSecondType = findViewById<Chip>(R.id.pokemon_second_type)
+//                val pokemonName = findViewById<TextView>(R.id.pokemon_name)
+//                val pokemonType = findViewById<Chip>(R.id.pokemon_type)
+//                val pokemonSecondType = findViewById<Chip>(R.id.pokemon_second_type)
+//                val pokemonCompose = findViewById<ComposeView>(R.id.my_composable)
+
                 item.let {
                     val formattedName = it.name.replaceFirstChar {
                         if (it.isLowerCase()) it.titlecase(
@@ -85,23 +95,43 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                         shape = GradientDrawable.RECTANGLE
                         cornerRadius = 24f
                     }
-                    pokemonBackground.background = drawable
+                 //   pokemonBackground.background = drawable
 
                     val formattedNumber = when {
                         number.length < 2 -> "00$number"
                         number.length < 3 -> "0$number"
                         else -> number
                     }
-                    Glide.with(itemView.context).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon)
-                    pokemonName.text = formattedName
-                    pokemonType.text = it.types[0].name
+
+                    Glide.with(itemView.context)
+                        .load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png")
+                        .into(pokemon)
+//                    val imageView = ImageView(context)
+//                    Glide.with(itemView.context)
+//                        .asBitmap()
+//                        .load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png")
+//                        .into(object : CustomTarget<Bitmap>(){
+//                            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+//                                imageView.setImageBitmap(resource)
+//                            }
+//                            override fun onLoadCleared(placeholder: Drawable?) {
+//                                // this is called when imageView is cleared on lifecycle call or for
+//                                // some other reason.
+//                                // if you are referencing the bitmap somewhere else too other than this imageView
+//                                // clear it here as you can no longer have the bitmap
+//                            }
+//                        })
+//                    val dr = imageView.drawable
+//                    pokecard.setPokeImage(dr)
+                    pokecard.setPokeName(formattedName)
+                    pokecard.setPokeType(it.types[0].name)
                     if (it.types.size > 1) {
-                        pokemonSecondType.text = it.types[1].name
-                        pokemonSecondType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[1].name)))
+                        pokecard.setPokeStype(it.types[1].name)
+                      //  pokemonSecondType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[1].name)))
                     } else {
-                        pokemonSecondType.visibility = View.GONE
+                     //   pokemonSecondType.visibility = View.GONE
                     }
-                    pokemonType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[0].name)))
+                   // pokemonType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[0].name)))
                 }
                 itemView.setOnClickListener {
                     onItemClickListener?.let {
