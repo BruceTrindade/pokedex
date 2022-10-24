@@ -2,15 +2,12 @@ package com.example.pokedex.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.compose.material3.Text
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.dsmpokedex.PokeCardView
 import com.example.pokedex.R
 import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint

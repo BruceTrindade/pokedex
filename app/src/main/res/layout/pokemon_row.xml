@@ -14,12 +14,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/pokemon_img"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_gravity="end"
-        android:padding="8dp" />
-
 
 </FrameLayout>
