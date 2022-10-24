@@ -60,7 +60,7 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
         Glide.with(view).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon_img_details)
         pokemon_name.text = formattedName
         pokemon_number.text = formattedNumber
-        pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), PokemonTypesColors.getTypeColor(args.pokemon.types[0].name)))
+        pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name)))
         pokemon_primary_type.text = args.pokemon.types[0].name
         if (args.pokemon.types.size > 1) {
             pokemon_second_type.text = args.pokemon.types[1].name

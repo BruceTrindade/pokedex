@@ -1,23 +1,15 @@
 package com.example.pokedex.view
 
-import android.content.res.ColorStateList
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.util.PokemonTypesColors
-import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_pokedex_details.*
+import kotlinx.android.synthetic.main.pokemon_row.view.*
 import java.util.*
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
@@ -61,11 +53,6 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
         fun bindView(item: Pokemon, onItemClickListener: ((Pokemon) -> Unit)? = null) {
             with(itemView) {
-                val pokemonBackground = findViewById<CardView>(R.id.home_background)
-                val pokemon = findViewById<ImageView>(R.id.pokemon_img)
-                val pokemonName = findViewById<TextView>(R.id.pokemon_name)
-                val pokemonType = findViewById<Chip>(R.id.pokemon_type)
-                val pokemonSecondType = findViewById<Chip>(R.id.pokemon_second_type)
                 item.let {
                     val formattedName = it.name.replaceFirstChar {
                         if (it.isLowerCase()) it.titlecase(
@@ -73,35 +60,18 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                         ) else it.toString()
                     }
                     val number = it.imageUrl
-                    val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(it.types[0].name))
-                    val secondColor = resources.getColor(R.color.white)
-                    val drawable = GradientDrawable().apply {
-                        colors = intArrayOf(
-                            primaryColor,
-                            if (it.types.size > 1) resources.getColor(PokemonTypesColors.getTypeColor(it.types[1].name)) else secondColor
-                        )
-                        orientation = GradientDrawable.Orientation.BOTTOM_TOP
-                        gradientType = GradientDrawable.LINEAR_GRADIENT
-                        shape = GradientDrawable.RECTANGLE
-                        cornerRadius = 24f
-                    }
-                    pokemonBackground.background = drawable
-
+                    val primaryColor = PokemonTypesColors.getTypeColor(it.types[0].name)
+                    val secondColor = if (it.types.size > 1) PokemonTypesColors.getTypeColor(it.types[1].name) else R.color.white
                     val formattedNumber = when {
                         number.length < 2 -> "00$number"
                         number.length < 3 -> "0$number"
                         else -> number
                     }
-                    Glide.with(itemView.context).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon)
-                    pokemonName.text = formattedName
-                    pokemonType.text = it.types[0].name
-                    if (it.types.size > 1) {
-                        pokemonSecondType.text = it.types[1].name
-                        pokemonSecondType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[1].name)))
-                    } else {
-                        pokemonSecondType.visibility = View.GONE
-                    }
-                    pokemonType.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, PokemonTypesColors.getTypeColor(it.types[0].name)))
+                    pokecard.setColors(primaryColor, secondColor)
+                    pokecard.setPokeImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png")
+                    pokecard.setPokeName(formattedName)
+                    pokecard.setPokeType(it.types[0].name)
+                    if (it.types.size > 1) pokecard.setPokeStype(it.types[1].name) else pokecard.setPokeStype("")
                 }
                 itemView.setOnClickListener {
                     onItemClickListener?.let {
