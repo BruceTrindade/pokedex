@@ -32,17 +32,17 @@ class PokemonViewModel @Inject constructor(
     private suspend fun requestPokemon() {
         viewModelScope.launch(Dispatchers.IO) {
             val test = repository.listPokemons()
-            if (test.isSuccessful) {
-                test.body()?.results.let {
+            val pokemonApiResult = repository.getPokemons()
+            pokemonApiResult.enqueue()
+            if (pokemonApiResult.) {
+                pokemonApiResult.body()?.results.let {
                     _pokemons.postValue(
                         it!!.map { pok ->
-                            val number = pok.url.replace("https://pokeapi.co/api/v2/pokemon/", "")
-                                .replace("/", "").toString()
-                            val pokemonApiResult = repository.getPokemons(number.toInt())
+                            val pokemonApiResult = repository.getPokemons()
 
-                            pokemonApiResult.body().let { value ->
+                            pokemonApiResult.let { value ->
                                 Pokemon(
-                                    value?.id.toString(),
+                                    it.id,
                                     value!!.name,
                                     value.types.map { ty ->
                                         ty.type

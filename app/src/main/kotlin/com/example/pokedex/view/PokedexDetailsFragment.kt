@@ -31,13 +31,16 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
 
     private fun setupView(view: View) {
         val pokemonBackground = card_img
-        val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name))
+        val primaryColor =
+            args.pokemon.types?.getOrNull(0).let {
+                resources.getColor(PokemonTypesColors.getTypeColor(it!!))
+            }
         args.pokemon.let {
             val secondColor = resources.getColor(R.color.white)
             val drawable = GradientDrawable().apply {
                 colors = intArrayOf(
                     primaryColor,
-                    if (it.types.size > 1) resources.getColor(PokemonTypesColors.getTypeColor(it.types[1].name)) else secondColor
+                    if (args.pokemon.types?.size!! > 1) resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types?.getOrNull(1).let { it!! })) else secondColor
                 )
                 orientation = GradientDrawable.Orientation.BOTTOM_TOP
                 gradientType = GradientDrawable.LINEAR_GRADIENT
@@ -60,11 +63,17 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
         Glide.with(view).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon_img_details)
         pokemon_name.text = formattedName
         pokemon_number.text = formattedNumber
-        pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name)))
-        pokemon_primary_type.text = args.pokemon.types[0].name
-        if (args.pokemon.types.size > 1) {
-            pokemon_second_type.text = args.pokemon.types[1].name
-            pokemon_second_type.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), PokemonTypesColors.getTypeColor(args.pokemon.types[1].name)))
+        args.pokemon.types?.getOrNull(0).let {
+             pokemon_primary_type.text = it
+             pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(resources.getColor(PokemonTypesColors.getTypeColor(it!!)))
+
+         }
+        if (args.pokemon.types?.size!! > 1) {
+            args.pokemon.types?.getOrNull(1).let {
+                pokemon_second_type.text = it
+                pokemon_second_type.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), PokemonTypesColors.getTypeColor(it!!)))
+
+            }
         } else pokemon_second_type.visibility = View.GONE
     }
 }

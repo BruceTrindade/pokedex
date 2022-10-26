@@ -60,8 +60,8 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                         ) else it.toString()
                     }
                     val number = it.imageUrl
-                    val primaryColor = PokemonTypesColors.getTypeColor(it.types[0].name)
-                    val secondColor = if (it.types.size > 1) PokemonTypesColors.getTypeColor(it.types[1].name) else R.color.white
+                    val primaryColor = PokemonTypesColors.getTypeColor(it.types?.getOrNull(0).let { it!! } )
+                    val secondColor = if (it.types?.size!! > 1) PokemonTypesColors.getTypeColor(it.types.getOrNull(1).let { it!! }) else R.color.white
                     val formattedNumber = when {
                         number.length < 2 -> "00$number"
                         number.length < 3 -> "0$number"
@@ -70,8 +70,8 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                     pokecard.setColors(primaryColor, secondColor)
                     pokecard.setPokeImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png")
                     pokecard.setPokeName(formattedName)
-                    pokecard.setPokeType(it.types[0].name)
-                    if (it.types.size > 1) pokecard.setPokeStype(it.types[1].name) else pokecard.setPokeStype("")
+                    pokecard.setPokeType(it.types.getOrNull(0).let { it!! })
+                    if (it.types.size > 1) pokecard.setPokeStype(it.types.getOrNull(1).let { it!! }) else pokecard.setPokeStype("")
                 }
                 itemView.setOnClickListener {
                     onItemClickListener?.let {

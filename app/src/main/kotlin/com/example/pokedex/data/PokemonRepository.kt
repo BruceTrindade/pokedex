@@ -10,7 +10,7 @@ class PokemonRepository @Inject constructor(
 ) {
 
     suspend fun listPokemons(limit: Int = 100) = service.listPokemons(limit)
-    suspend fun getPokemons(number: Int) = service.getPokemon(number)
+    suspend fun getPokemons() = service.getPokemon()
 
     suspend fun insert(pokemonModel: Pokemon) = dao.insert(pokemonModel)
     fun getAll() = dao.getAll()
