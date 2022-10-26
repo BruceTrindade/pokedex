@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.util.PokemonTypesColors
+import com.example.pokedex.util.formattedImageLink
+import com.example.pokedex.util.formatteName
 import kotlinx.android.synthetic.main.pokemon_row.view.*
-import java.util.*
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
@@ -54,21 +55,11 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
         fun bindView(item: Pokemon, onItemClickListener: ((Pokemon) -> Unit)? = null) {
             with(itemView) {
                 item.let {
-                    val formattedName = it.name.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.getDefault()
-                        ) else it.toString()
-                    }
-                    val number = it.imageUrl
+                    val formattedName = it.name.formatteName()
                     val primaryColor = PokemonTypesColors.getTypeColor(it.types[0].name)
                     val secondColor = if (it.types.size > 1) PokemonTypesColors.getTypeColor(it.types[1].name) else R.color.white
-                    val formattedNumber = when {
-                        number.length < 2 -> "00$number"
-                        number.length < 3 -> "0$number"
-                        else -> number
-                    }
                     pokecard.setColors(primaryColor, secondColor)
-                    pokecard.setPokeImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png")
+                    pokecard.setPokeImage(it.imageUrl.formattedImageLink())
                     pokecard.setPokeName(formattedName)
                     pokecard.setPokeType(it.types[0].name)
                     if (it.types.size > 1) pokecard.setPokeStype(it.types[1].name) else pokecard.setPokeStype("")
