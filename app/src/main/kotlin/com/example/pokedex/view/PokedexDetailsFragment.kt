@@ -10,10 +10,12 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.util.PokemonTypesColors
+import com.example.pokedex.util.formattedImageLink
+import com.example.pokedex.util.formatteName
+import com.example.pokedex.util.formatteNumber
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
 import kotlinx.android.synthetic.main.fragment_pokedex_details.pokemon_name
-import java.util.*
 
 @AndroidEntryPoint
 class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
@@ -46,19 +48,9 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
             }
             pokemonBackground.background = drawable
         }
-        val formattedName = args.pokemon.name.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
-            ) else it.toString()
-        }
-        val number = args.pokemon.imageUrl
-        val formattedNumber = when {
-            number.length < 2 -> "00$number"
-            number.length < 3 -> "0$number"
-            else -> number
-        }
-        Glide.with(view).load("https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedNumber.png").into(pokemon_img_details)
-        pokemon_name.text = formattedName
+        val formattedNumber = args.pokemon.imageUrl.formatteNumber()
+        Glide.with(view).load(args.pokemon.imageUrl.formattedImageLink()).into(pokemon_img_details)
+        pokemon_name.text = args.pokemon.name.formatteName()
         pokemon_number.text = formattedNumber
         pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name)))
         pokemon_primary_type.text = args.pokemon.types[0].name
