@@ -27,8 +27,6 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
         pokemonsObserver()
         setupListPokemons()
         setupClickPokemons()
-
-        // PokeCardView(Context)
     }
 
     private fun pokemonsObserver() = lifecycleScope.launch {
