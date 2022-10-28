@@ -32,6 +32,7 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
     }
 
     private fun setupView(view: View) {
+        val verifyTypeSize = args.pokemon.types.size > 1
         val pokemonBackground = card_img
         val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name))
         args.pokemon.let {
@@ -39,7 +40,7 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
             val drawable = GradientDrawable().apply {
                 colors = intArrayOf(
                     primaryColor,
-                    if (it.types.size > 1) resources.getColor(PokemonTypesColors.getTypeColor(it.types[1].name)) else secondColor
+                    if (verifyTypeSize) resources.getColor(PokemonTypesColors.getTypeColor(it.types[1].name)) else secondColor
                 )
                 orientation = GradientDrawable.Orientation.BOTTOM_TOP
                 gradientType = GradientDrawable.LINEAR_GRADIENT
@@ -48,13 +49,12 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
             }
             pokemonBackground.background = drawable
         }
-        val formattedNumber = args.pokemon.imageUrl.formatteNumber()
         Glide.with(view).load(args.pokemon.imageUrl.formattedImageLink()).into(pokemon_img_details)
         pokemon_name.text = args.pokemon.name.formatteName()
-        pokemon_number.text = formattedNumber
+        pokemon_number.text = args.pokemon.imageUrl.formatteNumber()
         pokemon_primary_type.chipBackgroundColor = ColorStateList.valueOf(resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name)))
         pokemon_primary_type.text = args.pokemon.types[0].name
-        if (args.pokemon.types.size > 1) {
+        if (verifyTypeSize) {
             pokemon_second_type.text = args.pokemon.types[1].name
             pokemon_second_type.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), PokemonTypesColors.getTypeColor(args.pokemon.types[1].name)))
         } else pokemon_second_type.visibility = View.GONE
