@@ -7,6 +7,15 @@
     android:background="@color/poke_white"
     tools:context=".view.PokedexHomeFragment">
 
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/pokeball_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_recycler"
         android:layout_width="match_parent"

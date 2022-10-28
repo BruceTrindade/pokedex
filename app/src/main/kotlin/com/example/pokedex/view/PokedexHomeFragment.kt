@@ -2,13 +2,15 @@ package com.example.pokedex.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.dsmpokedex.DotsTyping
 import com.example.pokedex.R
+import com.example.pokedex.util.Resource
 import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_home.*
@@ -30,14 +32,39 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     }
 
     private fun pokemonsObserver() = lifecycleScope.launch {
-        viewModel.pokemons.observe(
-            viewLifecycleOwner,
-            Observer {
-                pokemonAdapter.pokemons = it
+        viewModel.pokemons.collect { resources ->
+            when (resources) {
+                is Resource.Success -> {
+                    pokeball_loading.visibility = View.GONE
+                    resources.data?.let {
+                        pokemonAdapter.pokemons = it
+                    }
+                }
+                is Resource.Error -> {
+                    throw IllegalArgumentException(
+                        "Error: resource error"
+                    )
+                }
+                is Resource.Loading -> {
+                    pokeball_loading.visibility = View.VISIBLE
+                    setupLoadingCompose()
+                }
+                is Resource.Empty -> {
+                    throw IllegalArgumentException(
+                        "Error: empty"
+                    )
+                }
             }
-        )
+        }
     }
 
+    private fun setupLoadingCompose() {
+        pokeball_loading.setContent {
+            MaterialTheme {
+                DotsTyping()
+            }
+        }
+    }
     private fun setupListPokemons() {
         pokemon_recycler.apply {
             layoutManager = GridLayoutManager(context, 2)
