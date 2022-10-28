@@ -13,7 +13,6 @@ object PokemonTypesColors {
             "steel" -> R.color.steel
             "fire" -> R.color.fire
             "electric, psychic" -> R.color.electric_psychic
-            "psychic" -> R.color.psychic
             "ice" -> R.color.ice
             "dragon" -> R.color.dragon
             "fairy" -> R.color.fairy
