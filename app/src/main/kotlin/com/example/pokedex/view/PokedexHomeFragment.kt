@@ -36,6 +36,7 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
             when (resources) {
                 is Resource.Success -> {
                     pokeball_loading.visibility = View.GONE
+                    text_pokedex.visibility = View.GONE
                     resources.data?.let {
                         pokemonAdapter.pokemons = it
                     }
@@ -47,6 +48,7 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
                 }
                 is Resource.Loading -> {
                     pokeball_loading.visibility = View.VISIBLE
+                    text_pokedex.visibility = View.VISIBLE
                     setupLoadingCompose()
                 }
                 is Resource.Empty -> {

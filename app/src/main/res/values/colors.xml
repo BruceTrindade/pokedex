@@ -10,21 +10,18 @@
     <!-- POKEDEX COLORS B22328-->
     <color name="background">#2B292B</color>
     <color name="fighting">#9F422A</color>
-    <color name="grass">#179A55</color>
-    <color name="ground">#AD7235</color>
     <color name="fire">#F7786B</color>
-    <color name="flying">#90B1C5</color>
     <color name="ghost">#363069</color>
     <color name="ice">#7ECFF2</color>
-    <color name="poison">#FFBB86FC</color>
+    <color name="poison_ghost">#9F5BBA</color>
     <color name="psychic">#AC296B</color>
-    <color name="rock">#4B190E</color>
+    <color name="rock_ground">#CA8179</color>
     <color name="steel">#5C756D</color>
-    <color name="water">#58ABF6</color>
-    <color name="electric">#E0E64B</color>
+    <color name="water_fighting_normal">#58ABF6</color>
+    <color name="electric_psychic">#E0E64B</color>
     <color name="fairy">#9E1A44</color>
-    <color name="bug">#179A55</color>
-    <color name="dark">#040706</color>
+    <color name="bug_grass">#2CDAB1</color>
+    <color name="dark">#303943</color>
     <color name="dragon">#378A94</color>
 
    <!--     &lt;!&ndash; Poke Colors -->
