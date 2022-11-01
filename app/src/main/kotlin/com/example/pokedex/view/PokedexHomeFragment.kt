@@ -14,7 +14,6 @@ import com.example.pokedex.util.Resource
 import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_home.*
-import kotlinx.android.synthetic.main.pokemon_row.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
