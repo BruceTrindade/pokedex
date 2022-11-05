@@ -58,12 +58,12 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                     val verifyTypeSize = it.types.size > 1
                     val formattedName = it.name.formatteName()
                     val primaryColor = PokemonTypesColors.getTypeColor(it.types[0].name)
-                    val secondColor = if (verifyTypeSize) PokemonTypesColors.getTypeColor(it.types[1].name) else R.color.white
-                    pokecard.setColors(primaryColor, secondColor)
+                    val secondColor = if (verifyTypeSize) PokemonTypesColors.getTypeColor(it.types[1].name.formatteName()) else R.color.white
+                    pokecard.setPokeType(it.types[0].name.formatteName())
+                    if (verifyTypeSize) pokecard.setPokeSecondType(it.types[1].name.formatteName()) else pokecard.setPokeSecondType("")
                     pokecard.setPokeImage(it.imageUrl.formattedImageLink())
                     pokecard.setPokeName(formattedName)
-                    pokecard.setPokeType(it.types[0].name)
-                    if (verifyTypeSize) pokecard.setPokeStype(it.types[1].name) else pokecard.setPokeStype("")
+
                 }
                 itemView.setOnClickListener {
                     onItemClickListener?.let {
