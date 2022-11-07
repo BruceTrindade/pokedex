@@ -8,13 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.dsmpokedex.DotsTyping
+import com.example.dsmpokedex.PokeballLoading
 import com.example.pokedex.R
 import com.example.pokedex.util.Resource
 import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_home.*
-import kotlinx.android.synthetic.main.pokemon_row.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -63,7 +62,7 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     private fun setupLoadingCompose() {
         pokeball_loading.setContent {
             MaterialTheme {
-                DotsTyping()
+                PokeballLoading()
             }
         }
     }
