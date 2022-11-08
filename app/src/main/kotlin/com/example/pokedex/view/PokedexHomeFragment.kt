@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dsmpokedex.PokeballLoading
@@ -23,37 +25,43 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
     private val pokemonAdapter by lazy { PokemonAdapter() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PokemonViewModel::class.java)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pokemonsObserver()
         setupListPokemons()
         setupClickPokemons()
     }
 
-    private fun pokemonsObserver() = lifecycleScope.launch {
-        viewModel.pokemons.collect { resources ->
-            when (resources) {
-                is Resource.Success -> {
-                    pokeball_loading.visibility = View.GONE
-                    text_pokedex.visibility = View.GONE
-                    resources.data?.let {
-                        pokemonAdapter.pokemons = it
+    private fun pokemonsObserver() = viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewModel.pokemons.collect { resources ->
+                when (resources) {
+                    is Resource.Success -> {
+                        pokeball_loading.visibility = View.GONE
+                        text_pokedex.visibility = View.GONE
+                        resources.data?.let {
+                            pokemonAdapter.pokemons = it
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    throw IllegalArgumentException(
-                        "Error: resource error"
-                    )
-                }
-                is Resource.Loading -> {
-                    pokeball_loading.visibility = View.VISIBLE
-                    text_pokedex.visibility = View.VISIBLE
-                    setupLoadingCompose()
-                }
-                is Resource.Empty -> {
-                    throw IllegalArgumentException(
-                        "Error: empty"
-                    )
+                    is Resource.Error -> {
+                        throw IllegalArgumentException(
+                            "Error: resource error"
+                        )
+                    }
+                    is Resource.Loading -> {
+                        pokeball_loading.visibility = View.VISIBLE
+                        text_pokedex.visibility = View.VISIBLE
+                        setupLoadingCompose()
+                    }
+                    is Resource.Empty -> {
+                        throw IllegalArgumentException(
+                            "Error: empty"
+                        )
+                    }
                 }
             }
         }
