@@ -10,9 +10,9 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.util.PokemonTypesColors
-import com.example.pokedex.util.formattedImageLink
 import com.example.pokedex.util.formatteName
 import com.example.pokedex.util.formatteNumber
+import com.example.pokedex.util.formattedImageLink
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_pokedex_details.*
 import kotlinx.android.synthetic.main.fragment_pokedex_details.pokemon_name
