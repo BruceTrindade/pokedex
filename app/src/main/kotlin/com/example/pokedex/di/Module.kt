@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.pokedex.api.PokemonService
 import com.example.pokedex.data.local.PokedexDataBase
-import com.example.pokedex.util.Constants.BASE_URL
-import com.example.pokedex.util.Constants.DATABASE_NAME
+import com.example.pokedex.utils.Constants.BASE_URL
+import com.example.pokedex.utils.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

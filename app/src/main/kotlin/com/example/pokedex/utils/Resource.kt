@@ -1,4 +1,4 @@
-package com.example.pokedex.util
+package com.example.pokedex.utils
 
 sealed class Resource<T> (
     val data: T? = null,
