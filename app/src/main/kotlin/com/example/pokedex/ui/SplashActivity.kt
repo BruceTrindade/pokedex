@@ -1,4 +1,4 @@
-package com.example.pokedex.view
+package com.example.pokedex.ui
 
 import android.content.Intent
 import android.os.Bundle
