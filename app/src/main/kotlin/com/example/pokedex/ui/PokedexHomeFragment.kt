@@ -1,4 +1,4 @@
-package com.example.pokedex.view
+package com.example.pokedex.ui
 
 import android.os.Bundle
 import android.view.View
@@ -12,16 +12,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dsmpokedex.PokeballLoading
 import com.example.pokedex.R
-import com.example.pokedex.util.Resource
+import com.example.pokedex.databinding.FragmentPokedexHomeBinding
+import com.example.pokedex.utils.Resource
 import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_pokedex_home.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
     private lateinit var viewModel: PokemonViewModel
+
+    private var _binding: FragmentPokedexHomeBinding? = null
+    private val binding get() = _binding!!
 
     private val pokemonAdapter by lazy { PokemonAdapter() }
 
@@ -31,6 +34,7 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentPokedexHomeBinding.bind(view)
         pokemonsObserver()
         setupListPokemons()
         setupClickPokemons()
@@ -41,8 +45,8 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
             viewModel.pokemons.collect { resources ->
                 when (resources) {
                     is Resource.Success -> {
-                        pokeball_loading.visibility = View.GONE
-                        text_pokedex.visibility = View.GONE
+                        binding.pokeballLoading.visibility = View.GONE
+                        binding.textPokedex.visibility = View.GONE
                         resources.data?.let {
                             pokemonAdapter.pokemons = it
                         }
@@ -53,8 +57,8 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
                         )
                     }
                     is Resource.Loading -> {
-                        pokeball_loading.visibility = View.VISIBLE
-                        text_pokedex.visibility = View.VISIBLE
+                        binding.pokeballLoading.visibility = View.VISIBLE
+                        binding.textPokedex.visibility = View.VISIBLE
                         setupLoadingCompose()
                     }
                     is Resource.Empty -> {
@@ -68,14 +72,14 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
     }
 
     private fun setupLoadingCompose() {
-        pokeball_loading.setContent {
+        binding.pokeballLoading.setContent {
             MaterialTheme {
                 PokeballLoading()
             }
         }
     }
     private fun setupListPokemons() {
-        pokemon_recycler.apply {
+        binding.pokemonRecycler.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = pokemonAdapter
         }

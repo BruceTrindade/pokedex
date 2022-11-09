@@ -1,4 +1,4 @@
-package com.example.pokedex.util
+package com.example.pokedex.utils
 
 import com.example.pokedex.R
 

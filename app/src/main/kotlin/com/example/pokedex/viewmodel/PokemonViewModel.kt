@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.data.PokemonRepository
 import com.example.pokedex.data.model.PokemonAPI
-import com.example.pokedex.util.Resource
+import com.example.pokedex.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
