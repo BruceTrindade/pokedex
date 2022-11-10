@@ -1,4 +1,4 @@
-package com.example.pokedex.ui
+package com.example.pokedex.ui.details
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
