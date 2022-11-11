@@ -1,4 +1,4 @@
-package com.example.pokedex.ui
+package com.example.pokedex.ui.home
 
 import android.os.Bundle
 import android.view.View
@@ -14,14 +14,13 @@ import com.example.dsmpokedex.PokeballLoading
 import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentPokedexHomeBinding
 import com.example.pokedex.utils.Resource
-import com.example.pokedex.viewmodel.PokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
-    private lateinit var viewModel: PokemonViewModel
+    private lateinit var viewModel: PokedexHomeViewModel
 
     private var _binding: FragmentPokedexHomeBinding? = null
     private val binding get() = _binding!!
@@ -30,7 +29,7 @@ class PokedexHomeFragment : Fragment(R.layout.fragment_pokedex_home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PokemonViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PokedexHomeViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
