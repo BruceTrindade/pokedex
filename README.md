@@ -15,7 +15,9 @@ Pokedex app Android desenvolvido em kotlin com Hilt, Coroutines, Flow, ViewModel
 </p>
 </br>
 
-## Design
+## Design System
+Como esse é um projeto com objetivo de estudos, para aprendizao publiquei com SDK com alguns componentes que pode ser acessado nesse repositório: [Pokedex DesignSystem](https://github.com/BruceTrindade/PokedexDesignSystem)
+
 Design sendo inspirado por [SaepulNahwan](https://dribbble.com/shots/6545819-Pokedex-App)
 
 ## Download
