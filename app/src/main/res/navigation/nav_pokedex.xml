@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/firstDestination"
-        android:name="com.example.pokedex.ui.PokedexHomeFragment"
+        android:name="com.example.pokedex.ui.home.PokedexHomeFragment"
         android:label="fragment_pokedex_home"
         tools:layout="@layout/fragment_pokedex_home" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/pokedexDetailsFragment"
-        android:name="com.example.pokedex.ui.PokedexDetailsFragment"
+        android:name="com.example.pokedex.ui.details.PokedexDetailsFragment"
         android:label="fragment_pokedex_details"
         tools:layout="@layout/fragment_pokedex_details" >
         <argument

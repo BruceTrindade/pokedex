@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokedex">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
         </activity>
     </application>
