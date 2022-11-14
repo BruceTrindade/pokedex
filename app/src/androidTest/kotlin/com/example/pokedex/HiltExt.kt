@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.core.internal.deps.dagger.internal.Preconditions
@@ -45,5 +44,4 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
 
         (fragment as T).action()
     }
-
 }

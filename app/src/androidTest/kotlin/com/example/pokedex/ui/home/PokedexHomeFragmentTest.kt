@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.example.pokedex.MockPokemon.mockPokemon
 import com.example.pokedex.MockPokemon.navController
 import com.example.pokedex.R
@@ -28,14 +28,15 @@ class PokedexHomeFragmentTest {
     @Before
     fun setup() {
         hiltRule.inject()
-
-        launchFragmentInHiltContainer<PokedexHomeFragment> {
-            Navigation.setViewNavController(requireView(), navController)
-        }
     }
 
     @Test
     fun navigate_to_detailsPokedex() {
+        launchFragmentInHiltContainer<PokedexHomeFragment> {
+            Navigation.setViewNavController(requireView(), navController)
+        }
+
+        Thread.sleep(6000)
         onView(withId(R.id.pokemon_recycler))
             .perform(
                 RecyclerViewActions
