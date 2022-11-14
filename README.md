@@ -11,7 +11,7 @@ Projeto ainda em desenvolvimento (WIP)
 </p>
 
 <p align="center">  
-Pokedex app Android desenvolvido em kotlin com Hilt, Coroutines, Flow, ViewModel, testes e Material Design baseado na arquitetura MVVM.
+Pokedex app Android desenvolvido em kotlin com Hilt, Coroutines, Flow, ViewModel, Compose, testes e Material Design. Baseado na arquitetura MVVM.
 </p>
 </br>
 
