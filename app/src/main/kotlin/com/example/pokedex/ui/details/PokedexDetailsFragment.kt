@@ -25,18 +25,20 @@ class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState) //dsfdsfs
         _binding = FragmentPokedexDetailsBinding.bind(view)
         setupView(view)
     }
 
     private fun setupView(view: View) {
         val verifyTypeSize = args.pokemon.types.size > 1
-        val pokemonBackground = binding.cardImg
+        val pokemonBackground =
+            binding.cardImg
         val primaryColor = resources.getColor(PokemonTypesColors.getTypeColor(args.pokemon.types[0].name))
         args.pokemon.let {
             val secondColor = resources.getColor(R.color.white)

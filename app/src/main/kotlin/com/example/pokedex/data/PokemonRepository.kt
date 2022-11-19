@@ -8,5 +8,6 @@ class PokemonRepository @Inject constructor(
 ) {
 
     suspend fun listPokemons(limit: Int = 150) = service.listPokemons(limit)
+
     suspend fun getPokemons(number: Int) = service.getPokemon(number)
 }
