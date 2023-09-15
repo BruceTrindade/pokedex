@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.home
+package com.example.pokedex.ligashome.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -37,7 +37,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
         return PokemonViewHolder(binding)
     }
 
-    override fun getItemCount() = pokemons.size
+    override fun getItemCount() = minOf(pokemons.size, 20)
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val item = pokemons[position]

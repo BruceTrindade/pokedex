@@ -1,10 +1,10 @@
-package com.example.pokedex.ui.splash
+package com.example.pokedex.main.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pokedex.ui.main.MainActivity
+import com.example.pokedex.main.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 

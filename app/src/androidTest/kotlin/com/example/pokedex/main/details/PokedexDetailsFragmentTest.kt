@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.details
+package com.example.pokedex.main.details
 
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
@@ -10,6 +10,7 @@ import com.example.pokedex.MockPokemon
 import com.example.pokedex.MockPokemon.navController
 import com.example.pokedex.R
 import com.example.pokedex.launchFragmentInHiltContainer
+import com.example.pokedex.pokemonsdetails.details.PokedexDetailsFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

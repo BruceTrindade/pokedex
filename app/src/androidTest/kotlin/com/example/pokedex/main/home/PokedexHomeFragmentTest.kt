@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.home
+package com.example.pokedex.main.home
 
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +10,7 @@ import com.example.pokedex.MockPokemon.mockPokemon
 import com.example.pokedex.MockPokemon.navController
 import com.example.pokedex.R
 import com.example.pokedex.launchFragmentInHiltContainer
+import com.example.pokedex.ligashome.home.PokedexHomeFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

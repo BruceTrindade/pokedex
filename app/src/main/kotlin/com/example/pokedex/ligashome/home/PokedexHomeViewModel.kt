@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.home
+package com.example.pokedex.ligashome.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

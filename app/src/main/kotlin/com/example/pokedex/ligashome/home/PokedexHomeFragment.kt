@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.home
+package com.example.pokedex.ligashome.home
 
 import android.os.Bundle
 import android.view.View
