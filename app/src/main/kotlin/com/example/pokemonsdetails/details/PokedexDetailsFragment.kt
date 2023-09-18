@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PokedexDetailsFragment : Fragment(R.layout.fragment_pokedex_details) {
 
-    private val args: com.example.core.pokemonsdetails.details.PokedexDetailsFragmentArgs by navArgs()
+    private val args: PokedexDetailsFragmentArgs by navArgs()
 
     private var _binding: FragmentPokedexDetailsBinding? = null
     private val binding get() = _binding!!

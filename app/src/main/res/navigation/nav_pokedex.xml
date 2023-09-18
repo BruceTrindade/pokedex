@@ -11,8 +11,8 @@
         android:label="fragment_pokedex_home"
         tools:layout="@layout/fragment_pokedex_home" >
         <action
-            android:id="@+id/action_firstDestination_to_pokedexDetailsFragment"
-            app:destination="@id/pokedexDetailsFragment" />
+            android:id="@+id/action_firstDestination_to_pokedexListPokemonsFragment"
+            app:destination="@id/pokedexListPokemonsFragment" />
     </fragment>
 
     <fragment
@@ -24,6 +24,14 @@
             android:name="pokemon"
             app:argType="com.example.core.data.Pokemon" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/pokedexListPokemonsFragment"
+        android:name="com.example.listpokemons.PokedexListPokemonsFragment"
+        android:label="PokedexListPokemonsFragment" >
+        <action
+            android:id="@+id/action_pokedexListPokemonsFragment_to_pokedexDetailsFragment"
+            app:destination="@id/pokedexDetailsFragment" />
     </fragment>
 
 </navigation>

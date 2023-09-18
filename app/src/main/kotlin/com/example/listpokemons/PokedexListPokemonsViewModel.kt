@@ -1,4 +1,4 @@
-package com.example.ligashome.presentation
+package com.example.listpokemons
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +15,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class PokedexHomeViewModel @Inject constructor(
+class PokedexListPokemonsViewModel @Inject constructor(
     private val repository: PokemonRepository
 ) : ViewModel() {
 

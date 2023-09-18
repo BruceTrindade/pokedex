@@ -1,4 +1,4 @@
-package com.example.ligashome.presentation
+package com.example.listpokemons
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.data.Pokemon
+import com.example.core.databinding.PokemonItemBinding
 import com.example.core.utils.formatteName
 import com.example.core.utils.formattedImageLink
-import com.example.pokedex.databinding.PokemonItemBinding
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
