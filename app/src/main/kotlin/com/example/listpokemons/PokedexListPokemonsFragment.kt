@@ -2,7 +2,20 @@ package com.example.listpokemons
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -12,8 +25,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core.R
 import com.example.core.databinding.FragmentPokedexListPokemonsBinding
-import com.example.dsmpokedex.PokeballLoading
 import com.example.core.utils.Resource
+import com.example.dsmpokedex.PokeballLoading
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -50,16 +63,19 @@ class PokedexListPokemonsFragment : Fragment(R.layout.fragment_pokedex_list_poke
                             pokemonAdapter.pokemons = it
                         }
                     }
+
                     is Resource.Error -> {
                         throw IllegalArgumentException(
                             "Error: resource error"
                         )
                     }
+
                     is Resource.Loading -> {
                         binding.pokeballLoading.visibility = View.VISIBLE
                         binding.textPokedex.visibility = View.VISIBLE
-                        setupLoadingCompose()
+                        setupComposeViews()
                     }
+
                     is Resource.Empty -> {
                         throw IllegalArgumentException(
                             "Error: empty"
@@ -70,13 +86,57 @@ class PokedexListPokemonsFragment : Fragment(R.layout.fragment_pokedex_list_poke
         }
     }
 
-    private fun setupLoadingCompose() {
-        binding.pokeballLoading.setContent {
+    @OptIn(ExperimentalMaterial3Api::class)
+    private fun setupComposeViews() {
+        binding.pokeballBar.setContent {
             MaterialTheme {
-                PokeballLoading()
+                Scaffold(
+                    topBar = {
+                        topBar()
+                    },
+                    content = { innerPadding ->
+                        Column(modifier = androidx.compose.ui.Modifier.padding(innerPadding)) {
+                            binding.pokeballLoading.setContent {
+                                MaterialTheme {
+                                    PokeballLoading()
+                                }
+                            }
+                        }
+                    }
+                )
             }
         }
     }
+
+    @Composable
+    private fun topBar() {
+        CenterAlignedTopAppBar(
+            title = {
+                Text(
+                    "Centered TopAppBar",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            },
+            navigationIcon = {
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(
+                        imageVector = Icons.Filled.Menu,
+                        contentDescription = "Localized description"
+                    )
+                }
+            },
+            actions = {
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(
+                        imageVector = Icons.Filled.Favorite,
+                        contentDescription = "Localized description"
+                    )
+                }
+            }
+        )
+    }
+
     private fun setupListPokemons() {
         binding.pokemonRecycler.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -86,7 +146,10 @@ class PokedexListPokemonsFragment : Fragment(R.layout.fragment_pokedex_list_poke
 
     private fun setupClickPokemons() {
         pokemonAdapter.setOnClickListener { pokemon ->
-            val actions = PokedexListPokemonsFragmentDirections.actionPokedexListPokemonsFragmentToPokedexDetailsFragment(pokemon)
+            val actions =
+                PokedexListPokemonsFragmentDirections.actionPokedexListPokemonsFragmentToPokedexDetailsFragment(
+                    pokemon
+                )
             findNavController().navigate(actions)
         }
     }
