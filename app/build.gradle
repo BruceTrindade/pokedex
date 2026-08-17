@@ -4,20 +4,20 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id("androidx.navigation.safeargs")
 }
 
 android {
-    compileSdk 33
+    namespace 'com.example.core'
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.pokedex"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.example.pokedex.HiltTestRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -25,95 +25,75 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            testCoverageEnabled true
-        }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-    }
-    hilt {
-        enableTransformForLocalTests = true
+        jvmTarget = '17'
     }
     buildFeatures {
-        viewBinding true
         compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler_version
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
 
+// Some transitive deps pull kotlin-stdlib 1.9.0, which AGP 7.4.2's D8 fails to dex.
+// Pin the stdlib to the project's Kotlin version.
+configurations.all {
+    resolutionStrategy {
+        force "org.jetbrains.kotlin:kotlin-stdlib:1.8.22"
+        force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22"
+        force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22"
     }
 }
 
 dependencies {
 
-    // Android
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    // Android core
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+    implementation 'androidx.activity:activity-compose:1.7.2'
 
-    // Tests
-
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.4.0'
-    androidTestImplementation 'androidx.navigation:navigation-testing:2.5.2'
-
-    debugImplementation 'androidx.fragment:fragment-testing:1.5.3'
-
-    testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_version"
-    androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.37'
-
-    androidTestImplementation 'org.mockito:mockito-android:3.2.4'
-
-    debugImplementation "androidx.fragment:fragment-testing:1.3.0-alpha08"
-
-    //compose
+    // Compose
     implementation "androidx.compose.ui:ui:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-alpha01'
-    implementation 'androidx.activity:activity-compose:1.3.1'
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation 'androidx.compose.material3:material3:1.1.2'
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
-    // Pokedex Design System
+    // Navigation Compose
+    implementation 'androidx.navigation:navigation-compose:2.6.0'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
+    // Coil (image loading)
+    implementation 'io.coil-kt:coil-compose:2.4.0'
+
+    // Pokedex Design System (Compose components: PokeChips, PokeballLoading)
     implementation 'com.github.BruceTrindade:PokedexDesignSystem:53'
-
-    // room
-    implementation "androidx.room:room-runtime:2.5.0-alpha02"
-    kapt "androidx.room:room-compiler:2.5.0-alpha02"
-    implementation "androidx.room:room-ktx:2.5.0-alpha02"
-
-    // Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.42"
-    kapt "com.google.dagger:hilt-android-compiler:2.42"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    // Fragment Navigation
-    def fragment_version = "1.4.1"
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
-
-    def nav_version = "2.3.5"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
-    implementation("androidx.navigation:navigation-compose:2.4.0-rc01")
-
+    // Tests
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 }

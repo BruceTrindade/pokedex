@@ -9,6 +9,7 @@ import com.example.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
@@ -20,8 +21,15 @@ class PokedexListPokemonsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _pokemons = MutableStateFlow<Resource<List<Pokemon>>>(Resource.Loading())
+    val pokemons: StateFlow<Resource<List<Pokemon>>> = _pokemons.asStateFlow()
 
-    val pokemons: StateFlow<Resource<List<Pokemon>>> = _pokemons
+    /** Pokémon chosen on the list, read by the details screen (shared via nav graph scope). */
+    private val _selectedPokemon = MutableStateFlow<Pokemon?>(null)
+    val selectedPokemon: StateFlow<Pokemon?> = _selectedPokemon.asStateFlow()
+
+    fun selectPokemon(pokemon: Pokemon) {
+        _selectedPokemon.value = pokemon
+    }
 
     init {
         fetch()
