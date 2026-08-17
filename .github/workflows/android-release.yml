@@ -6,6 +6,9 @@ on:
       - master
     tags:
       - "v*"
+  pull_request:
+    branches:
+      - master
 
 jobs:
   apk:
@@ -13,18 +16,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Setup JDK
-        uses: actions/setup-java@v2.5.0
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "11"
+          java-version: "17"
+          cache: gradle
       - name: Set execution flag for gradlew
         run: chmod +x gradlew
       - name: Build APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
       - name: Upload APK
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -32,27 +36,18 @@ jobs:
   release:
     name: Release APK
     needs: apk
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Download APK from build
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4
         with:
           name: apk
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.run_number }}
-          release_name: ${{ github.event.repository.name }} v${{ github.run_number }}
-      - name: Upload Release APK
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: apk/app-debug.apk
-          asset_name: ${{ github.event.repository.name }}.apk
-          asset_content_type: application/zip
+          name: ${{ github.event.repository.name }} v${{ github.run_number }}
+          files: app-debug.apk
